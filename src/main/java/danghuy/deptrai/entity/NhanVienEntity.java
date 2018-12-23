@@ -23,7 +23,8 @@ public class NhanVienEntity {
             inverseJoinColumns = {@JoinColumn(name = "maNVTiepNhan")})
     private Set<YeuCauEntity> yeuCauEntities = new HashSet<YeuCauEntity>();
 
-    public NhanVienEntity(String tenNV, String ngaySinh, String soDT, String diaChi, String viTri, String trinhDo) {
+    public NhanVienEntity(String tenNV, String ngaySinh, String soDT, String diaChi,
+                          String viTri, String trinhDo) {
         this.tenNV = tenNV;
         this.ngaySinh = ngaySinh;
         this.soDT = soDT;

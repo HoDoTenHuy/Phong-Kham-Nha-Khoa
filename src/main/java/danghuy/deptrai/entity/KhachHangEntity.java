@@ -18,11 +18,8 @@ public class KhachHangEntity {
     private String soDT;
     private String ngheNghiep;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "yeu_cau",
-    joinColumns = {@JoinColumn(name = "maKH")},
-    inverseJoinColumns = {@JoinColumn(name = "maKH")})
-    private Set<ChiTietYeuCauEntity> chiTietYeuCauEntities = new HashSet<ChiTietYeuCauEntity>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "khachHangEntity")
+    private Set<YeuCauEntity> yeuCauEntities = new HashSet<YeuCauEntity>();
 
     public KhachHangEntity() {
     }
@@ -36,22 +33,23 @@ public class KhachHangEntity {
         this.ngheNghiep = ngheNghiep;
     }
 
-    public KhachHangEntity(String tenKH, String ngaySinh, String gioiTinh, String diaChi, String soDT, String ngheNghiep, Set<ChiTietYeuCauEntity> chiTietYeuCauEntities) {
+    public KhachHangEntity(String tenKH, String ngaySinh, String gioiTinh, String diaChi, String soDT,
+                           String ngheNghiep, Set<YeuCauEntity> yeuCauEntities) {
         this.tenKH = tenKH;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
         this.soDT = soDT;
         this.ngheNghiep = ngheNghiep;
-        this.chiTietYeuCauEntities = chiTietYeuCauEntities;
+        this.yeuCauEntities = yeuCauEntities;
     }
 
-    public Set<ChiTietYeuCauEntity> getChiTietYeuCauEntities() {
-        return chiTietYeuCauEntities;
+    public Set<YeuCauEntity> getYeuCauEntities() {
+        return yeuCauEntities;
     }
 
-    public void setChiTietYeuCauEntities(Set<ChiTietYeuCauEntity> chiTietYeuCauEntities) {
-        this.chiTietYeuCauEntities = chiTietYeuCauEntities;
+    public void setYeuCauEntities(Set<YeuCauEntity> yeuCauEntities) {
+        this.yeuCauEntities = yeuCauEntities;
     }
 
     public int getMaKH() {

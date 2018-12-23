@@ -8,29 +8,33 @@ public class DichVuChiTietEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maDichVuChiTiet;
-
-    /*@Column(name = "loaiDichVu")
-    private int loaiDichVu_id; // ma loai dich vu*/
-
     private String tenDichVuChiTiet;
     private String phiDieuTri;
     private String phiPhuThu;
     private String moTaChiTietPhuThu;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "loaiDichVu")
+    @OneToOne(mappedBy = "dichVuChiTietEntity", cascade = CascadeType.ALL)
     private LoaiDichVuEntity loaiDichVuEntitiy;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "maDVChiTiet")
     private ChiTietYeuCauEntity chiTietYeuCauEntity;
 
-    public DichVuChiTietEntity(String tenDichVuChiTiet, String phiDieuTri, String phiPhuThu, String moTaChiTietPhuThu, LoaiDichVuEntity loaiDichVuEntitiy) {
+    public DichVuChiTietEntity(String tenDichVuChiTiet, String phiDieuTri,
+                               String phiPhuThu, String moTaChiTietPhuThu, LoaiDichVuEntity loaiDichVuEntitiy) {
         this.tenDichVuChiTiet = tenDichVuChiTiet;
         this.phiDieuTri = phiDieuTri;
         this.phiPhuThu = phiPhuThu;
         this.moTaChiTietPhuThu = moTaChiTietPhuThu;
         this.loaiDichVuEntitiy = loaiDichVuEntitiy;
+    }
+
+    public ChiTietYeuCauEntity getChiTietYeuCauEntity() {
+        return chiTietYeuCauEntity;
+    }
+
+    public void setChiTietYeuCauEntity(ChiTietYeuCauEntity chiTietYeuCauEntity) {
+        this.chiTietYeuCauEntity = chiTietYeuCauEntity;
     }
 
     public DichVuChiTietEntity() {

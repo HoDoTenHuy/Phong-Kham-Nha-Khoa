@@ -54,7 +54,7 @@ public class ChiTietYeuCauEntity {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "maDichVuChiTiet")
+    @JoinColumn(name = "maDVChiTiet")
     private Set<DichVuChiTietEntity> dichVuChiTietEntitySet = new HashSet<DichVuChiTietEntity>();
 
     @OneToOne(cascade = CascadeType.ALL)

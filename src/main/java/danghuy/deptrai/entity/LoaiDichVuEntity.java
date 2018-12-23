@@ -9,8 +9,22 @@ public class LoaiDichVuEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int loaiDichVu;
     private String tenLoaiDichVu;
-
+    private DichVuChiTietEntity dichVuChiTietEntity;
     public LoaiDichVuEntity() {
+    }
+
+    public LoaiDichVuEntity(String tenLoaiDichVu, DichVuChiTietEntity dichVuChiTietEntity) {
+        this.tenLoaiDichVu = tenLoaiDichVu;
+        this.dichVuChiTietEntity = dichVuChiTietEntity;
+    }
+
+    @OneToOne(mappedBy = "chiTietYeuCauEntity",cascade = CascadeType.ALL)
+    public DichVuChiTietEntity getDichVuChiTietEntity() {
+        return dichVuChiTietEntity;
+    }
+
+    public void setDichVuChiTietEntity(DichVuChiTietEntity dichVuChiTietEntity) {
+        this.dichVuChiTietEntity = dichVuChiTietEntity;
     }
 
     public LoaiDichVuEntity(String tenLoaiDichVu) {

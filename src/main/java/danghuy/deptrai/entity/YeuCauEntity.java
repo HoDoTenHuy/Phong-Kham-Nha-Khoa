@@ -10,17 +10,11 @@ public class YeuCauEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maYeuCau;
-    /*@Column(name = "maKH")
-    private int khachHang_id; // ma khach hang cua bang khach hang*/
-    /*@Column(name = "maNVTiepNhan")
-    private int nhanVien_id; // ma nhan vien tiep nhan*/
     private String ngayTiepNhan;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "khach_hang",
-            joinColumns = {@JoinColumn(name = "maKH")},
-            inverseJoinColumns = {@JoinColumn(name = "maKH")})
-    private Set<KhachHangEntity> khachHangEntities = new HashSet<KhachHangEntity>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "maKH")
+    private KhachHangEntity khachHangEntity;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "nhan_vien",
@@ -28,9 +22,13 @@ public class YeuCauEntity {
             inverseJoinColumns = {@JoinColumn(name = "maNV")})
     private Set<NhanVienEntity> nhanVienEntities = new HashSet<NhanVienEntity>();
 
-    public YeuCauEntity(String ngayTiepNhan, Set<KhachHangEntity> khachHangEntities, Set<NhanVienEntity> nhanVienEntities) {
+    @OneToOne(mappedBy = "yeuCauEntity", cascade = CascadeType.ALL)
+    private ChiTietYeuCauEntity chiTietYeuCauEntity;
+
+
+    public YeuCauEntity(String ngayTiepNhan, KhachHangEntity khachHangEntity, Set<NhanVienEntity> nhanVienEntities) {
         this.ngayTiepNhan = ngayTiepNhan;
-        this.khachHangEntities = khachHangEntities;
+        this.khachHangEntity = khachHangEntity;
         this.nhanVienEntities = nhanVienEntities;
     }
 
@@ -45,12 +43,12 @@ public class YeuCauEntity {
         this.nhanVienEntities = nhanVienEntities;
     }
 
-    public Set<KhachHangEntity> getKhachHangEntities() {
-        return khachHangEntities;
+    public KhachHangEntity getKhachHangEntity() {
+        return khachHangEntity;
     }
 
-    public void setKhachHangEntities(Set<KhachHangEntity> khachHangEntities) {
-        this.khachHangEntities = khachHangEntities;
+    public void setKhachHangEntities(KhachHangEntity khachHangEntity) {
+        this.khachHangEntity = khachHangEntity;
     }
 
     public int getMaYeuCau() {
